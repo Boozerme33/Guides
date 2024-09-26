@@ -1,0 +1,43 @@
+### September 26, 2024
+##extractors
+
+@flatfile/plugin-delimiter-extractor@2.2.0
+The delimiter extractor plugin now provides a new option `skipEmptyLines` to skip empty lines in the parsed data. This option allows developers to control how empty lines are handled during parsing. When set to true, empty lines will be omitted from the resulting data. If set to false, empty lines will be included as rows with empty values. This change gives more flexibility in handling empty lines based on the specific requirements of the application.
+
+Additionally, the plugin now removes any trailing empty rows from the parsed data, regardless of the `skipEmptyLines` setting. This ensures that the output data does not include unnecessary empty rows at the end.
+
+For example, when parsing a CSV file with the following content:
+
+```
+header1,header2,header3
+column1,column2,column3
+,,
+,,
+column4,column5,column6
+column7,column8,column9
+,,
+,,
+,,
+```
+
+If `skipEmptyLines` is set to true, the resulting data will be:
+
+```json
+[
+  { "header1": "column1", "header2": "column2", "header3": "column3" },
+  { "header1": "column4", "header2": "column5", "header3": "column6" },
+  { "header1": "column7", "header2": "column8", "header3": "column9" }
+]
+```
+
+If `skipEmptyLines` is set to false, the resulting data will be:
+
+```json
+[
+  { "header1": "column1", "header2": "column2", "header3": "column3" },
+  { "header1": "", "header2": "", "header3": "" },
+  { "header1": "", "header2": "", "header3": "" },
+  { "header1": "column4", "header2": "column5", "header3": "column6" },
+  { "header1": "column7", "header2": "column8", "header3": "column9" }
+]
+```
