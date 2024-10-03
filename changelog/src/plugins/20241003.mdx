@@ -1,0 +1,15 @@
+### October 03, 2024
+##extractors
+
+@flatfile/plugin-pdf-extractor@0.3.1
+This release updates the @flatfile/api dependency to improve regional support. The @flatfile/util-file-buffer and @flatfile/util-common dependencies have also been updated to versions 0.4.1 and 1.4.1 respectively. The plugin version has been updated to 0.3.1.
+
+For example, to use the updated plugin:
+
+```javascript
+import { createListener } from '@flatfile/listener';
+import { FlatfilePluginPdfExtractor } from '@flatfile/plugin-pdf-extractor';
+
+const listener = createListener();
+listener.registerPlugin(FlatfilePluginPdfExtractor);
+```
